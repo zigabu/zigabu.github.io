@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Zigabu
-// @version      0.2
+// @version      0.3
 // @description  Anti-Z-bot on pikabu.ru
 // @author       Aleksandr Ryazansky
 // @icon         https://avatars.githubusercontent.com/u/103862835?s=200&v=4
@@ -17,49 +17,14 @@
     var time = GM_getValue("time");
     if (!time || time < (new Date() / 1000) + 3600) {
         GM_setValue("time", new Date() / 1000);
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: 'https://zigabu.github.io/zots.json',
-            timeout: 5000,
-            onload: function(response) {
-                if (response.readyState === 4 && response.status === 200) {
-                    try {
-                        if (response && response.responseText) {
-                            var array = JSON.parse(response.responseText);
-                            array.forEach(function(id) {
-                                GM_setValue(id, "down");
-                            });
-                        }
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-            }
-        });
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: 'https://zigabu.github.io/humans.json',
-            timeout: 5000,
-            onload: function(response) {
-                if (response.readyState === 4 && response.status === 200) {
-                    try {
-                        if (response && response.responseText) {
-                            var array = JSON.parse(response.responseText);
-                            array.forEach(function(id) {
-                                GM_setValue(id, "up");
-                            });
-                        }
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-            }
-        });
+        Zbot_xmlhttpRequest("https://zigabu.github.io/zbots.json", "down");
+        Zbot_xmlhttpRequest("https://zigabu.github.io/humans.json", "up");
+        Zbot_xmlhttpRequest("https://zigabu.github.io/remove.json", "none");
     }
 
-    Zot(); setInterval(function(){Zot();}, 5000);
+    Zbot(); setInterval(function(){Zbot();}, 5000);
 
-    function Zot() {
+    function Zbot() {
         document.querySelectorAll("article.story:not(.read)").forEach(function(e, i){
             if (!e) return;
 
@@ -75,22 +40,25 @@
             var name = e.dataset.authorName;
             if (!id) return;
 
-            var zot = GM_getValue(id);
+            var action = GM_getValue(id);
 
-            if (zot) {
+            if (action) {
+                var rating = e.querySelector(".story__rating-" + action);
+                if (!rating) return;
                 e.style.opacity = "0.4";
-                var rating = e.querySelector(".story__rating-" + zot);
                 setTimeout(function(){
                     rating.click();
                     console.log("Zot", id, "(post)");
                 }, 1000 * Math.floor(Math.random() * 2 + 1) * (i + 1));
             } else {
                 var footer = document.createElement("div");
-                var plus_title = document.createElement("div");
+                var plus_title = document.createElement("a");
                 var plus_description = document.createElement("div");
 
                 plus_title.style.fontWeight = "bold";
-                plus_title.innerText = "ID " + id + " | " + name;
+                plus_title.innerText = "PIKABU ID " + id + " | " + name;
+                plus_title.href = "https://github.com/zigabu/zigabu.github.io/issues/new";
+                plus_title.setAttribute("target", "_blank");
 
                 var author_username1 = document.createElement("div");
                 var author_username2 = document.createElement("span");
@@ -151,15 +119,42 @@
             });
             if (!id) return;
 
-            var zot = GM_getValue(id);
+            var action = GM_getValue(id);
 
-            if (zot) {
+            if (action) {
+                var rating = e.querySelector(".comment__rating-" + action);
+                if (!rating) return;
                 e.style.opacity = "0.4";
-                var down = e.querySelector(".comment__rating-" + zot);
                 setTimeout(function(){
-                    down.click();
+                    rating.click();
                     console.log("Zot", id, "(comment)");
                 }, 1000 * Math.floor(Math.random() * 2 + 1) * (i + 1));
+            }
+        });
+    }
+
+    function Zbot_xmlhttpRequest(url, val) {
+        GM_xmlhttpRequest({
+            method: 'GET',
+            url: url,
+            timeout: 5000,
+            onload: function(response) {
+                if (response.readyState === 4 && response.status === 200) {
+                    try {
+                        if (response && response.responseText) {
+                            var array = JSON.parse(response.responseText);
+                            array.forEach(function(id) {
+                                if (typeof id === 'object') {
+                                    GM_setValue(id[0], val);
+                                } else {
+                                    GM_setValue(id, val);
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
             }
         });
     }
