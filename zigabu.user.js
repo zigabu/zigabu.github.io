@@ -90,7 +90,7 @@
                 var plus_description = document.createElement("div");
 
                 plus_title.style.fontWeight = "bold";
-                plus_title.innerText = "ZOT: " + name + " | ID " + id;
+                plus_title.innerText = "ID " + id + " | " + name;
 
                 var author_username1 = document.createElement("div");
                 var author_username2 = document.createElement("span");
