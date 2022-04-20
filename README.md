@@ -1,4 +1,4 @@
-<img src="https://zigabu.github.io/logo.png">
+<img src="https://zigabu.github.io/logo.png?v1">
 
 # Zigabu - скрипт для сохранения Пикабу развлекательным
 
