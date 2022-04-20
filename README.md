@@ -10,16 +10,27 @@
  - искажают поданную информацию.
 
 ### Как добавить скрипт в браузер?
-- Установите <a href="https://www.tampermonkey.net/">Tampermonkey</a> в браузер;
-- Установите скрипт <a href="https://zigabu.github.io/zigabu.user.js">Zigabu</a>.
+- Установите <a href="https://www.tampermonkey.net/">Tampermonkey</a> в браузер
+
+<a href="https://www.tampermonkey.net/"><img src="https://zigabu.github.io/tutorial/1.png?v1"></a>
+
+- Установите скрипт <a href="https://zigabu.github.io/zigabu.user.js">Zigabu</a>
+
+<a href="https://zigabu.github.io/zigabu.user.js"><img src="https://zigabu.github.io/tutorial/2.png?v1"></a>
+
+- Разрешите получение списка Z-ботов с <a href="https://zigabu.github.io/zbots.json">zbots.json</a> - **`Always allow domain`**
+
+<a href="https://zigabu.github.io/zbots.json"><img src="https://zigabu.github.io/tutorial/3.png?v1"></a>
 
 ### Как добавить нового Z-бота?
 - Отредактируйте файл <a href="https://github.com/zigabu/zigabu.github.io/blob/main/zbots.json">zbots.json</a> и сделайте Pull request.
+
 или
+
 - Создайте новый <a href="https://github.com/zigabu/zigabu.github.io/issues">Issue</a> и бот после проверки будет добавлен.
 
 ### Пользователь добавлен по ошибке, как удалить логин?
-В первую очередь прошу прощения, что такое случилось. Если произошло непонимание, ваш логин будет удален. Для этого добавьте ваш логин в файл <a href="https://github.com/zigabu/zigabu.github.io/blob/main/remove.json">remove.json</a> и сделайте Pull request.
+В первую очередь `прошу прощения`, что такое случилось. Если произошло непонимание, ваш логин будет удален. Для этого добавьте ваш логин в файл <a href="https://github.com/zigabu/zigabu.github.io/blob/main/remove.json">remove.json</a> и сделайте Pull request.
 
 ### За что отвечает файл humans.json
 Это нейтральные пользователи на Пикабу, посты которых несут только развлекательный характер, к примеру пользователь <a href="https://pikabu.ru/@HelloIRainbow">HelloIRainbow</a> и посты таких пользователей получают автоматические плюсы. Запрещено заносить пользователей, публикующих под тегом Политика, вне зависимости от позиции, которую они занимают.
