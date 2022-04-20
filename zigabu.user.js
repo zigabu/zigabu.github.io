@@ -129,6 +129,10 @@
                     rating.click();
                     console.log("Zot", id, "(comment)");
                 }, 1000 * Math.floor(Math.random() * 2 + 1) * (i + 1));
+            } else {
+                var user__nick = e.querySelector(".user__nick");
+                if (!user__nick) return;
+                user__nick.innerText = "[ " + id + ", \"" + user__nick.innerText + "\" ]";
             }
         });
     }
