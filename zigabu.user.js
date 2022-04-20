@@ -56,7 +56,7 @@
                 var plus_description = document.createElement("div");
 
                 plus_title.style.fontWeight = "bold";
-                plus_title.innerText = "PIKABU ID " + id + " | " + name;
+                plus_title.innerText = "PIKABU ID [ " + id + ", \"" + name + "\" ]";
                 plus_title.href = "https://github.com/zigabu/zigabu.github.io/issues/new";
                 plus_title.setAttribute("target", "_blank");
 
